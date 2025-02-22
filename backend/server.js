@@ -164,6 +164,12 @@ app.get('/api/kurse', (req, res) => {
   });
 });
 
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./openapi.yaml');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // 2. Participant Registration API
 app.post('/api/anmeldung', (req, res) => {
   const { teilnehmer, kursnr } = req.body;
